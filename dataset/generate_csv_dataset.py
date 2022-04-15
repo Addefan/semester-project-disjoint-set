@@ -1,6 +1,12 @@
+"""
+Генерация наборов данных (формат хранения - CSV)
+"""
 import argparse
+from random import randint
+from os.path import join
+from os import makedirs
 
-DEFAULT_DESCRIPTION = 'CSV dataset generator script demo.'
+DEFAULT_DESCRIPTION = 'CSV dataset generator script'
 DEFAULT_SAMPLES = 100
 
 
@@ -20,9 +26,44 @@ def parse_args():
     parser.add_argument('--samples',
                         type=int,
                         default=DEFAULT_SAMPLES,
-                        help='number of samples to generate (default: {})'.format(DEFAULT_SAMPLES))
+                        help=f'number of samples to generate (default: {DEFAULT_SAMPLES})')
 
     return parser.parse_args()
+
+
+def generate_all_datasets():
+    """
+    Генерация всех наборов данных
+    """
+    # Три операции: создание, поиск, объединение
+    for operation in ('make', 'find', 'union'):
+
+        # Порядковый номер набора данных
+        for dataset in range(1, 6):
+
+            # Количество элементов в наборе данных
+            for amount in range(100, 10 ** 6 + 1, 99990):
+
+                # Приведение к двухсимвольному числу
+                dataset = str(dataset)
+                dataset = '0' + dataset if len(dataset) == 1 else dataset
+
+                # Пути к файлу и к директории, в которой файл находится
+                dir_path = join('data', operation, dataset)
+                file_path = join(dir_path, str(amount) + '.csv')
+
+                # Создание директорий по пути к файлу, если они не существуют
+                try:
+                    makedirs(dir_path)
+                except FileExistsError:
+                    pass
+
+                # Заполнение файла числами
+                finally:
+                    with open(file_path, 'w', encoding='utf-8') as file:
+                        for _ in range(amount - 1):
+                            file.write(str(randint(0, 10 ** 7 + 1)) + '\n')
+                        file.write(str(randint(0, 10 ** 7 + 1)))
 
 
 if __name__ == '__main__':
@@ -33,7 +74,9 @@ if __name__ == '__main__':
         raise ValueError('Number of samples must be greater than 0.')
 
     # запись данных в файл
-    with open(args.output, 'w') as file:
-        for i in range(args.samples - 1):
-            file.write('{},'.format(i))
-        file.write(str(args.samples - 1))
+    with open(args.output, 'w', encoding='utf-8') as file:
+        for i in range(args.samples + 1):
+            file.write(str(randint(0, 10 ** 7 + 1)) + '\n')
+
+    # Раскомментируйте сточку ниже, чтобы сгенерировать сразу все наборы данных
+    # generate_all_datasets()
