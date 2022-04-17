@@ -42,7 +42,7 @@ def generate_all_datasets():
         for dataset in range(1, 6):
 
             # Количество элементов в наборе данных
-            for amount in range(100, 10 ** 6 + 1, 99990):
+            for amount in (100, 500, 1000, 5000, 10000, 25000, 50000, 100000, 250000, 500000, 750000, 1000000):
 
                 # Приведение к двухсимвольному числу
                 dataset = str(dataset)
