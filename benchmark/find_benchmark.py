@@ -1,5 +1,4 @@
 import argparse
-import random
 from sys import path
 from os.path import split, abspath
 from os import curdir
