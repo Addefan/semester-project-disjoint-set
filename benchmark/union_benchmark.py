@@ -45,7 +45,7 @@ if __name__ == '__main__':
 
     # Создание директорий по пути к файлу, если они не существуют
     try:
-        makedirs(args.output.split[0])
+        makedirs(split(args.output)[0])
     except FileExistsError:
         pass
 
