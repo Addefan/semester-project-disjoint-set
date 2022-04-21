@@ -1,12 +1,12 @@
 import argparse
 from sys import path
 from os.path import split, abspath
-from os import curdir
+from os import curdir, makedirs
 from copy import deepcopy
 from time import perf_counter_ns
+
 path.append(abspath(curdir))
 from src.disjoint_set import DisjointSet  # noqa: E402
-
 
 DEFAULT_DESCRIPTION = 'Union operation benchmark script'
 DEFAULT_TRIALS = 10
@@ -43,8 +43,14 @@ if __name__ == '__main__':
     if args.trials < 0:
         raise ValueError('Number of trials must be greater than 0.')
 
+    # Создание директорий по пути к файлу, если они не существуют
+    try:
+        makedirs(args.output.split[0])
+    except FileExistsError:
+        pass
+
     with open(args.input, 'r', encoding='utf-8') as inp_file, \
-         open(args.output, 'w', encoding='utf-8') as out_file:
+            open(args.output, 'w', encoding='utf-8') as out_file:
 
         # Вытаскивание количества поданых элементов из названия файла
         amount = int(split(args.input)[1].split('.')[0])
@@ -65,7 +71,6 @@ if __name__ == '__main__':
 
         # Количество прогонов на наборе данных
         for trial in range(args.trials):
-
             # Создание копии созданной выше СНМ
             disjoint_set_copy = deepcopy(disjoint_set)
 

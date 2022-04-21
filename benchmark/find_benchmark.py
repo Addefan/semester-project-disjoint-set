@@ -1,7 +1,7 @@
 import argparse
 from sys import path
 from os.path import split, abspath
-from os import curdir
+from os import curdir, makedirs
 from time import perf_counter_ns
 from random import choice
 path.append(abspath(curdir))
@@ -42,6 +42,13 @@ if __name__ == '__main__':
 
     if args.trials < 0:
         raise ValueError('Number of trials must be greater than 0.')
+
+    # Создание директорий по пути к файлу, если они не существуют
+    try:
+        makedirs(args.output.split[0])
+    except FileExistsError:
+        pass
+
 
     with open(args.input, 'r', encoding='utf-8') as inp_file, \
          open(args.output, 'w', encoding='utf-8') as out_file:

@@ -3,7 +3,7 @@
 """
 import argparse
 from random import randint
-from os.path import join
+from os.path import join, split
 from os import makedirs
 
 DEFAULT_DESCRIPTION = 'CSV dataset generator script'
@@ -72,6 +72,12 @@ if __name__ == '__main__':
     # валидация аргументов
     if args.samples < 0:
         raise ValueError('Number of samples must be greater than 0.')
+
+    # Создание директорий по пути к файлу, если они не существуют
+    try:
+        makedirs(split(args.output)[0])
+    except FileExistsError:
+        pass
 
     # запись данных в файл
     with open(args.output, 'w', encoding='utf-8') as file:
