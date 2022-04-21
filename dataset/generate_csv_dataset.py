@@ -81,8 +81,9 @@ if __name__ == '__main__':
 
     # запись данных в файл
     with open(args.output, 'w', encoding='utf-8') as file:
-        for i in range(args.samples + 1):
+        for i in range(args.samples - 1):
             file.write(str(randint(0, 10 ** 7 + 1)) + '\n')
+        file.write(str(randint(0, 10 ** 7 + 1)))
 
     # Раскомментируйте сточку ниже, чтобы сгенерировать сразу все наборы данных
     # generate_all_datasets()

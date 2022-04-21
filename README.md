@@ -86,9 +86,9 @@ python generate_csv_dataset.py <output> --samples 100
 Генерация CSV-файла со ста элементами:
 ```shell
 cd dataset
-python generate_csv_dataset.py dataset/data/make/01/100.csv --samples 100
+python generate_csv_dataset.py data/make/01/100.csv --samples 100
 ```
-где `<output> = dataset/data/make/01/100.csv`    
+где `<output> = data/make/01/100.csv`    
 
 
 #### Контрольные тесты (benchmarks)
