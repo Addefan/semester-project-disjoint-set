@@ -1,12 +1,15 @@
+"""
+Контрольное тестирование операции Find
+"""
 import argparse
 from sys import path
 from os.path import split, abspath
 from os import curdir, makedirs
 from time import perf_counter_ns
 from random import choice
+
 path.append(abspath(curdir))
 from src.disjoint_set import DisjointSet  # noqa: E402
-
 
 DEFAULT_DESCRIPTION = 'Find operation benchmark script'
 DEFAULT_TRIALS = 10
@@ -49,9 +52,8 @@ if __name__ == '__main__':
     except FileExistsError:
         pass
 
-
     with open(args.input, 'r', encoding='utf-8') as inp_file, \
-         open(args.output, 'w', encoding='utf-8') as out_file:
+            open(args.output, 'w', encoding='utf-8') as out_file:
 
         # Вытаскивание количества поданых элементов из названия файла
         amount = int(split(args.input)[1].split('.')[0])
@@ -70,7 +72,6 @@ if __name__ == '__main__':
 
         # Количество прогонов на наборе данных
         for trial in range(args.trials):
-
             # Замер времени поиска случайного элемента СНМ и запись в файл
             find_elem = choice(disjoint_set_element)
             start_time = perf_counter_ns()

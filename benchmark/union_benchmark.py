@@ -1,3 +1,6 @@
+"""
+Контрольное тестирование операции Union
+"""
 import argparse
 from sys import path
 from os.path import split, abspath

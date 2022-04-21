@@ -1,11 +1,14 @@
+"""
+Контрольное тестирование операции MakeSet
+"""
 import argparse
 from sys import path
 from os.path import split, abspath
 from os import curdir, makedirs
 from time import perf_counter_ns
+
 path.append(abspath(curdir))
 from src.disjoint_set import DisjointSet  # noqa: E402
-
 
 DEFAULT_DESCRIPTION = 'Make operation benchmark script'
 DEFAULT_TRIALS = 10
@@ -48,9 +51,8 @@ if __name__ == '__main__':
     except FileExistsError:
         pass
 
-
     with open(args.input, 'r', encoding='utf-8') as inp_file, \
-         open(args.output, 'w', encoding='utf-8') as out_file:
+            open(args.output, 'w', encoding='utf-8') as out_file:
 
         # Вытаскивание количества поданых элементов из названия файла
         amount = int(split(args.input)[1].split('.')[0])
@@ -61,17 +63,17 @@ if __name__ == '__main__':
             # Создание системы непересекающихся множеств из amount одноэлементных множеств,
             # замеряется время каждого создания одноэлементного множества
             disjoint_set = DisjointSet()
-            all_time = 0
+            ALL_TIME = 0
             for _ in range(amount):
                 elem = int(inp_file.readline())
                 start_time = perf_counter_ns()
                 disjoint_set.make_set(elem)
                 finish_time = perf_counter_ns()
-                all_time += finish_time - start_time
+                ALL_TIME += finish_time - start_time
 
             # Перемещение указателя в файле на начало
             inp_file.seek(0)
 
             # Нахождение среднего времени создания одноэлементного множества и его запись в файл
-            average_time = all_time / amount
+            average_time = ALL_TIME / amount
             out_file.write(str(average_time) + '\n')
