@@ -56,6 +56,8 @@ git clone https://github.com/Addefan/semester-project-disjoint-set.git
 
 Сборка и запуск проекта осуществляется через среду разработки.
 
+[Видео-инструкция по сборке проекта](https://youtu.be/gAnWMP4i85A)
+
 #### Генерация тестовых данных
 
 Формат данных: [comma-seperated values (CSV)](https://en.wikipedia.org/wiki/Comma-separated_values).
@@ -82,13 +84,18 @@ python generate_csv_dataset.py <output> --samples 100
 8555103
 ...
 ```
+По названию директории `/dataset/data/make` можно понять, что здесь хранятся наборы данных для контрольных тестов по
+**соданию одноэлементного множества** в структуре данных. Названия файлов `100.csv`. `5000000.csv` и т.д. хранят информацию о 
+размере набора данных (т.е. количество элементов).
 
 Генерация CSV-файла со ста элементами:
 ```shell
 cd dataset
 python generate_csv_dataset.py data/make/01/100.csv --samples 100
 ```
-где `<output> = data/make/01/100.csv`    
+где `<output> = data/make/01/100.csv`  
+
+[Видео-инструкция по генерации данных](https://youtu.be/xI5u7KAHB9c)
 
 
 #### Контрольные тесты (benchmarks)
@@ -129,6 +136,7 @@ python benchmark/make_benchmark.py dataset/data/make/01/100.csv benchmark/metric
 
 где `<input> = dataset/data/make/01/100.csv` и `<output> = benchmark/metrics.txt`  
 
+[Видео-инструкция по запуску контрольных тестов](https://youtu.be/5wm64oyQM80)
 
 ## Источники
 
